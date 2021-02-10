@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class CameraController : MonoBehaviour
+public class CameraTrigger : MonoBehaviour
 {
-    Camera mainCamera;
-    PositionConstraint positionConstraint;
+    [SerializeField] PositionConstraint positionConstraint;
+
+    Axis axis;
 
     private void Awake()
     {
-        mainCamera = GetComponent<Camera>();
-        positionConstraint = GetComponent<PositionConstraint>();
+        axis = positionConstraint.translationAxis;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         positionConstraint.locked = false;
+        
         Debug.Log("UNLOCK");
     }
 

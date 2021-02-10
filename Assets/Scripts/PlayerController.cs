@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float speed = 0;
     [SerializeField] float jumpForce = 0;
-    [SerializeField] float wallJumpForce = 0;
 
     Rigidbody2D rBody2D;
     PlayerState state;
@@ -28,7 +27,6 @@ public class PlayerController : MonoBehaviour
     ContactFilter2D wallsFilterLeft2D;
     ContactFilter2D wallsFilterRight2D;
     SpriteRenderer playerR;
-    int countJump;
     bool IsAngleJumpPlace;
 
     void Awake()
@@ -64,7 +62,8 @@ public class PlayerController : MonoBehaviour
             float _jumpValue = Input.GetAxis("Jump");
 
             var _velocity = rBody2D.velocity;
-            _velocity.x = Vector2.right.x * speed * _horizontalValue;
+           if(!IsAngleJumpPlace)
+                _velocity.x = Vector2.right.x * speed * _horizontalValue;
 
             if (_velocity.x > 0)
             {
@@ -77,11 +76,11 @@ public class PlayerController : MonoBehaviour
 
             if (IsGrounded)
             {
-                _velocity.y = 0;
+                //_velocity.y = 0;
 
                 if (_jumpValue > 0)
                 {
-                    _velocity.y += Vector2.up.y * jumpForce;
+                    _velocity.y = Vector2.up.y * jumpForce;
                     State = PlayerState.Jump;
                 }
                 else if (_velocity.x == 0)
@@ -97,34 +96,30 @@ public class PlayerController : MonoBehaviour
             {
                 if (IsAngleJumpPlace)
                 {
-                    if (IsNearRightWall || IsNearLeftWall)
-                    {
-                        _velocity.y = 0;
-                    }
-
                     if (_jumpValue > 0)
                     {
-                        if (IsNearLeftWall && countJump == 0)
+                        if (IsNearLeftWall )
                         {
-                            _velocity = Vector2.one * wallJumpForce;
+                            _velocity = Vector2.one * jumpForce;
                             playerR.flipX = false;
-                            countJump++;
                         }
-                        else if (IsNearRightWall && countJump == 0)
+                        else if (IsNearRightWall)
                         {
-                            _velocity.x = Vector2.one.x * wallJumpForce * -1;
-                            _velocity.y = Vector2.one.y * wallJumpForce;
+                            _velocity.x = Vector2.one.x * jumpForce * -1;
+                            _velocity.y = Vector2.one.y * jumpForce;
                             playerR.flipX = true;
-                            countJump++;
                         }
-                    }
-                    else
-                    {
-                        countJump = 0;
                     }
                 }
 
-                State = PlayerState.Jump;
+                if (_velocity.y < 0)
+                {
+                    State = PlayerState.Fall;
+                }
+                else
+                {
+                    State = PlayerState.Jump;
+                }
             }
             
             rBody2D.velocity = _velocity;            
@@ -198,11 +193,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("LEVEL COMPLETE");
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
