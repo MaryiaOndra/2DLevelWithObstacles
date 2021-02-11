@@ -14,15 +14,5 @@ public class CameraController : MonoBehaviour
         positionConstraint = GetComponent<PositionConstraint>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        positionConstraint.locked = false;
-        Debug.Log("UNLOCK");
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        positionConstraint.locked = true;
-        Debug.Log("UNLOCK");
-    }
 }

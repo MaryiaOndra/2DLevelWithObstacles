@@ -62,7 +62,8 @@ public class PlayerController : MonoBehaviour
             float _jumpValue = Input.GetAxis("Jump");
 
             var _velocity = rBody2D.velocity;
-           if(!IsAngleJumpPlace)
+
+            if(!IsAngleJumpPlace)
                 _velocity.x = Vector2.right.x * speed * _horizontalValue;
 
             if (_velocity.x > 0)
@@ -76,8 +77,6 @@ public class PlayerController : MonoBehaviour
 
             if (IsGrounded)
             {
-                //_velocity.y = 0;
-
                 if (_jumpValue > 0)
                 {
                     _velocity.y = Vector2.up.y * jumpForce;
@@ -126,7 +125,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool IsGrounded
+    public bool IsGrounded
     {
         get
         {
@@ -189,9 +188,17 @@ public class PlayerController : MonoBehaviour
         {
             IsAngleJumpPlace = true;
         }
-        else if (collision.tag == "HappyEnd")
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("LEVEL COMPLETE");
+        if (collision.tag == "HappyEnd")
         {
-            Debug.Log("LEVEL COMPLETE");
+            if (IsGrounded)
+            {
+                rBody2D.AddForce(Vector2.up * jumpForce / 2, ForceMode2D.Impulse);
+            }
         }
     }
 

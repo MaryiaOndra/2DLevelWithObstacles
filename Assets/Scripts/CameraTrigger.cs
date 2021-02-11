@@ -7,23 +7,14 @@ public class CameraTrigger : MonoBehaviour
 {
     [SerializeField] PositionConstraint positionConstraint;
 
-    Axis axis;
-
-    private void Awake()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        axis = positionConstraint.translationAxis;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        positionConstraint.locked = false;
-        
-        Debug.Log("UNLOCK");
+        positionConstraint.translationAxis = Axis.Y | Axis.X;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        positionConstraint.translationAxis = Axis.X;
         positionConstraint.locked = true;
-        Debug.Log("UNLOCK");
     }
 }
