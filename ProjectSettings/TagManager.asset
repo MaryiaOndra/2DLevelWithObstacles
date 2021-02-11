@@ -51,6 +51,9 @@ TagManager:
   - name: BackObjects
     uniqueID: 1694427867
     locked: 0
+  - name: Enemy
+    uniqueID: 3312139553
+    locked: 0
   - name: Player
     uniqueID: 273527729
     locked: 0
