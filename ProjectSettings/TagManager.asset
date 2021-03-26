@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Tube
   - HappyEnd
+  - Water
+  - Belt
   layers:
   - Default
   - TransparentFX

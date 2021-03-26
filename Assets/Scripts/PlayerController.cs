@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     ContactFilter2D wallsFilterRight2D;
     SpriteRenderer playerR;
     bool IsAngleJumpPlace;
+    bool IsBeltPlace;
 
     void Awake()
     {
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
             var _velocity = rBody2D.velocity;
 
-            if(!IsAngleJumpPlace)
+            if (!IsAngleJumpPlace)
                 _velocity.x = Vector2.right.x * speed * _horizontalValue;
 
             if (_velocity.x > 0)
@@ -164,6 +165,7 @@ public class PlayerController : MonoBehaviour
         {
             State = PlayerState.Die;
         }
+
     }
 
     public void OnDied() 
