@@ -25,15 +25,15 @@ public class JumpState : BaseState
         float _horizontalValue = Input.GetAxis("Horizontal");
         var _velocity = rBody2D.velocity;
 
-        _velocity.x = Vector2.right.x * speed * _horizontalValue;
+         _velocity.x = Vector2.right.x * speed * _horizontalValue;
 
         if (_velocity.x > 0)
         {
-            playerR.flipX = false;
+            playerSprite.flipX = false;
         }
         else if (_velocity.x < 0)
         {
-            playerR.flipX = true;
+            playerSprite.flipX = true;
         }
 
         if (IsGrounded)
@@ -47,13 +47,9 @@ public class JumpState : BaseState
                 NextStateAction.Invoke(PlayerState.Run);
             }
         }
-        else if (IsNearLeftWall || IsNearRightWall && _velocity.y < 0) 
+        else if (_velocity.y < 0)
         {
-            NextStateAction.Invoke(PlayerState.AngleJump);
-        }
-        else
-        {
-            NextStateAction.Invoke(PlayerState.Jump);
+            NextStateAction.Invoke(PlayerState.Fall);
         }
 
         rBody2D.velocity = _velocity;

@@ -11,68 +11,52 @@ public class AngleJumpState : BaseState
 
     public override void Activate()
     {
+
         base.Activate();
 
-        var _velocity = rBody2D.velocity;
+        //var _velocity = rBody2D.velocity;
 
         //if (IsNearLeftWall)
         //{
         //    _velocity = Vector2.one * jumpForce;
-        //    playerR.flipX = false;
+        //    playerSprite.flipX = false;
         //}
         //else if (IsNearRightWall)
         //{
         //    _velocity.x = Vector2.one.x * jumpForce * -1;
         //    _velocity.y = Vector2.one.y * jumpForce;
-        //    playerR.flipX = true;
+        //    playerSprite.flipX = true;
         //}
+        //rBody2D.velocity = _velocity;
     }
 
     private void FixedUpdate()
     {
-        float _horizontalValue = Input.GetAxis("Horizontal");
-        float _jumpValue = Input.GetAxis("Jump");
 
         var _velocity = rBody2D.velocity;
 
-        if (_velocity.x > 0)
-        {
-            playerR.flipX = false;
-        }
-        else if (_velocity.x < 0)
-        {
-            playerR.flipX = true;
-        }
+        float _jumpValue = Input.GetAxis("Jump");
 
         if (_jumpValue > 0)
         {
             if (IsNearLeftWall)
             {
                 _velocity = Vector2.one * jumpForce;
-                playerR.flipX = false;
+                playerSprite.flipX = false;
             }
             else if (IsNearRightWall)
             {
                 _velocity.x = Vector2.one.x * jumpForce * -1;
                 _velocity.y = Vector2.one.y * jumpForce;
-                playerR.flipX = true;
+                playerSprite.flipX = true;
             }
         }
+
+        rBody2D.velocity = _velocity;
 
         if (_velocity.y < 0)
         {
             NextStateAction.Invoke(PlayerState.Fall);
         }
-        else if (IsGrounded)
-        {
-            NextStateAction.Invoke(PlayerState.Idle);
-        }
-        //else 
-        //{
-        //    NextStateAction.Invoke(PlayerState.AngleJump);
-        //}
-
-
-        rBody2D.velocity = _velocity;
     }
 }

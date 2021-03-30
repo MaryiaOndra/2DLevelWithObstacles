@@ -35,6 +35,7 @@ Transform:
   - {fileID: 3759500797873612213}
   - {fileID: 2506007831354409439}
   - {fileID: 2677053017905602936}
+  - {fileID: 5574488412434078732}
   m_Father: {fileID: 8090490006244623611}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728c0091c1e707f4586756d4c9dbed9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  jumpForce: 5
+  speed: 5
+  jumpForce: 3
 --- !u!1 &1900137988
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5d99561619eca429055a3dd882d3d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
 --- !u!1 &3376701909862562670
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +223,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3759500797873612213}
-  - component: {fileID: 6611007758809277013}
   - component: {fileID: 8090490007755136769}
   m_Layer: 0
   m_Name: AngleJumpState
@@ -245,18 +245,6 @@ Transform:
   m_Father: {fileID: 68336595}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6611007758809277013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3376701909862562670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed30b80b2f4804498ab6978b6c3de4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8090490007755136769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938712c6d8cc5a04c97077cb4f88e23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 5
 --- !u!1 &3971060375432498196
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4081407346875837526}
-  - component: {fileID: 4732581982862741040}
   - component: {fileID: 8090490007755136770}
   m_Layer: 0
   m_Name: FallState
@@ -301,18 +289,6 @@ Transform:
   m_Father: {fileID: 68336595}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4732581982862741040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3971060375432498196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed30b80b2f4804498ab6978b6c3de4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8090490007755136770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a09ddd7d5ff064689c95777e1af3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
 --- !u!1 &5268348625529355052
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +311,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2677053017905602936}
-  - component: {fileID: 8029192263975599176}
   - component: {fileID: 8090490007755136767}
   m_Layer: 0
   m_Name: ClimbState
@@ -357,18 +333,6 @@ Transform:
   m_Father: {fileID: 68336595}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8029192263975599176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5268348625529355052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed30b80b2f4804498ab6978b6c3de4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8090490007755136767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +345,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360a0e51a9fe49e46b9e4b9b5c70cbca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5662061582464203334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5574488412434078732}
+  - component: {fileID: 5193296628686827658}
+  m_Layer: 0
+  m_Name: WinState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5574488412434078732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5662061582464203334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 68336595}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5193296628686827658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5662061582464203334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ea6572de9911d498878ed6e2f34c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 3
 --- !u!1 &8090490006244624133
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +488,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f16a60e2f07356746ae80a6ed2298934, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -499,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 7
+  jumpForce: 5
 --- !u!70 &8090490006244623609
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -546,7 +554,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2506007831354409439}
-  - component: {fileID: 3422299817656108121}
   - component: {fileID: 8090490007755136768}
   m_Layer: 0
   m_Name: DuckState
@@ -569,18 +576,6 @@ Transform:
   m_Father: {fileID: 68336595}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3422299817656108121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8657877401243453276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed30b80b2f4804498ab6978b6c3de4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8090490007755136768
 MonoBehaviour:
   m_ObjectHideFlags: 0

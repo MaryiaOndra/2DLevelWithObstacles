@@ -20,11 +20,11 @@ public class RunState : BaseState
 
         if (_velocity.x > 0)
         {
-            playerR.flipX = false;
+            playerSprite.flipX = false;
         }
         else if (_velocity.x < 0)
         {
-            playerR.flipX = true;
+            playerSprite.flipX = true;
         }
 
         if (IsGrounded)
@@ -37,6 +37,10 @@ public class RunState : BaseState
             {
                 NextStateAction.Invoke(PlayerState.Idle);
             }
+        }
+        else if (_velocity.y < 0)
+        {
+            NextStateAction.Invoke(PlayerState.Fall);
         }
         else
         {

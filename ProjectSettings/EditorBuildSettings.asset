@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/2DLevel/Scenes/1.9_2DLevelWithObstacles.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/2DLevel/Scenes/2.6_2DLevelWithEffects.unity
+    guid: 4451cd78a6b7aac458ecb4141215f9b3
   m_configObjects: {}

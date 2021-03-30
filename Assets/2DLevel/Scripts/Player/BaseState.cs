@@ -7,7 +7,7 @@ public abstract class BaseState : MonoBehaviour
 {
     static readonly int INT_STATE = Animator.StringToHash("State");
    
-    protected SpriteRenderer playerR;
+    protected SpriteRenderer playerSprite;
     protected Rigidbody2D rBody2D;
     protected Animator playerAnimator;
 
@@ -21,7 +21,7 @@ public abstract class BaseState : MonoBehaviour
 
     public void Setup(Rigidbody2D _rBody2D, SpriteRenderer _playerR, Animator _playerAnimator) 
     {
-        playerR = _playerR;
+        playerSprite = _playerR;
         rBody2D = _rBody2D;
         playerAnimator = _playerAnimator;
 
@@ -34,6 +34,7 @@ public abstract class BaseState : MonoBehaviour
     {
         gameObject.SetActive(true);
         playerAnimator.SetInteger(INT_STATE, (int)PlayerState);
+        Debug.Log(PlayerState);
     }
 
     public virtual void Diactivate() 
@@ -48,6 +49,18 @@ public abstract class BaseState : MonoBehaviour
             NextStateAction.Invoke(PlayerState.Die);
         }
 
+    }
+
+    public virtual void OnTrigger(Collider2D collision)
+    {
+        if (collision.tag == "HappyEnd")
+        {
+            NextStateAction.Invoke(PlayerState.Win);
+        }
+        else if (collision.tag == "Stair")
+        {
+            NextStateAction.Invoke(PlayerState.Climb);
+        }
     }
 
     protected bool IsGrounded

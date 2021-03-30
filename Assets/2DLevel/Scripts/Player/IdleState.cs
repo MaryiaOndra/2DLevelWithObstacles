@@ -11,11 +11,12 @@ public class IdleState : BaseState
         float _horizontalValue = Input.GetAxis("Horizontal");
         float _jumpValue = Input.GetAxis("Jump");
 
+
         if (_horizontalValue != 0)
         {
             NextStateAction.Invoke(PlayerState.Run);
         }
-        else if (_jumpValue != 0) 
+        else if (_jumpValue != 0)
         {
             NextStateAction.Invoke(PlayerState.Jump);
         }
