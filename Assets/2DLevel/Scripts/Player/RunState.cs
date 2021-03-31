@@ -14,6 +14,7 @@ public class RunState : BaseState
     private void FixedUpdate()
     {
         float _horizontalValue = Input.GetAxis("Horizontal");
+        float _verticalValue = Input.GetAxis("Vertical");
         float _jumpValue = Input.GetAxis("Jump");
 
         var _velocity = rBody2D.velocity;
@@ -39,6 +40,10 @@ public class RunState : BaseState
             {
                 NextStateAction.Invoke(PlayerState.Idle);
             }
+            else if (_verticalValue < 0)
+            {
+                NextStateAction.Invoke(PlayerState.Duck);
+            }
         }
         else if (_velocity.y < lowYVelosity)
         {
@@ -48,5 +53,6 @@ public class RunState : BaseState
         {
             NextStateAction.Invoke(PlayerState.Jump);
         }
+
     }
 }

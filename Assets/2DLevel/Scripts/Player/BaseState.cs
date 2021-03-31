@@ -98,20 +98,15 @@ public abstract class BaseState : MonoBehaviour
         {
             bool _value = false;
             float _dist = 1.5f;
-           
-            RaycastHit2D _hitCheck = Physics2D.Raycast(rBody2D.transform.position, rBody2D.transform.TransformDirection(Vector2.up), _dist);
+            int _layerMask = LayerMask.GetMask("Platform");
 
-            if (_hitCheck.collider.tag != "Platform")
-            {
+            RaycastHit2D _hitCheck = Physics2D.Raycast(transform.position, Vector2.up, _dist, _layerMask);
+
+            if (_hitCheck.collider == null)
                 _value = false;
-                Debug.DrawRay(rBody2D.position, Vector2.up * _dist, Color.green);
-            }
             else
-            {
-                Debug.DrawRay(rBody2D.position, Vector2.up * _dist, Color.yellow);
-                Debug.Log("IS Ceiling above");
                 _value = true;
-            }
+
             return _value;
         }
     }
