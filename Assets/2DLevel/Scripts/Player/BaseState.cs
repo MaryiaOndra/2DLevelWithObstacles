@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,46 +15,34 @@ public abstract class BaseState : MonoBehaviour
     protected ContactFilter2D wallsFilterLeft2D;
     protected ContactFilter2D wallsFilterRight2D;
 
-    public abstract PlayerState PlayerState {get;}
+    #region Properties
+    public abstract PlayerState PlayerState { get; }
     public Action<PlayerState> NextStateAction { get; set; }
 
-    public void Setup(Rigidbody2D _rBody2D, SpriteRenderer _playerR, Animator _playerAnimator) 
+    protected float HorizontalValue 
     {
-        playerSprite = _playerR;
-        rBody2D = _rBody2D;
-        playerAnimator = _playerAnimator;
-        collider2Ds = new List<Collider2D>();
-        SetGroundWallFilters();
-    }
-
-    public virtual void Activate() 
-    {
-        gameObject.SetActive(true);
-        playerAnimator.SetInteger(INT_STATE, (int)PlayerState);
-    }
-
-    public virtual void Diactivate() 
-    {
-        gameObject.SetActive(false);
-    }
-
-    public virtual void OnCollision(Collision2D collision)
-    {
-        if (collision.transform.tag == "Poison" || collision.transform.tag == "Enemy")
+        get 
         {
-            NextStateAction.Invoke(PlayerState.Die);
+            float _horizontalValue = Input.GetAxis("Horizontal");
+            return _horizontalValue;
+        }    
+    }
+
+    protected float VerticalValue
+    {
+        get
+        {
+            float _verticalValue = Input.GetAxis("Vertical");
+            return _verticalValue;
         }
     }
 
-    public virtual void OnTrigger(Collider2D collision)
+    protected float JumpValue 
     {
-        if (collision.tag == "HappyEnd")
+        get
         {
-            NextStateAction.Invoke(PlayerState.Win);
-        }
-        else if (collision.tag == "Stair")
-        {
-            NextStateAction.Invoke(PlayerState.Climb);
+            float _jumpValue = Input.GetAxis("Jump");
+            return _jumpValue;
         }
     }
 
@@ -108,6 +95,48 @@ public abstract class BaseState : MonoBehaviour
                 _value = true;
 
             return _value;
+        }
+    }
+
+    #endregion
+
+    public void Setup(Rigidbody2D _rBody2D, SpriteRenderer _playerR, Animator _playerAnimator) 
+    {
+        playerSprite = _playerR;
+        rBody2D = _rBody2D;
+        playerAnimator = _playerAnimator;
+        collider2Ds = new List<Collider2D>();
+        SetGroundWallFilters();
+    }
+
+    public virtual void Activate() 
+    {
+        gameObject.SetActive(true);
+        playerAnimator.SetInteger(INT_STATE, (int)PlayerState);
+    }
+
+    public virtual void Diactivate() 
+    {
+        gameObject.SetActive(false);
+    }
+
+    public virtual void OnCollision(Collision2D collision)
+    {
+        if (collision.transform.tag == "Poison" || collision.transform.tag == "Enemy")
+        {
+            NextStateAction.Invoke(PlayerState.Die);
+        }
+    }
+
+    public virtual void OnTrigger(Collider2D collision)
+    {
+        if (collision.tag == "HappyEnd")
+        {
+            NextStateAction.Invoke(PlayerState.Win);
+        }
+        else if (collision.tag == "Stair")
+        {
+            NextStateAction.Invoke(PlayerState.Climb);
         }
     }
 

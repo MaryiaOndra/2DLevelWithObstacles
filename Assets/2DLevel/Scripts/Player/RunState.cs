@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RunState : BaseState
 {
@@ -13,12 +11,8 @@ public class RunState : BaseState
 
     private void FixedUpdate()
     {
-        float _horizontalValue = Input.GetAxis("Horizontal");
-        float _verticalValue = Input.GetAxis("Vertical");
-        float _jumpValue = Input.GetAxis("Jump");
-
         var _velocity = rBody2D.velocity;
-         _velocity.x = Vector2.right.x * speed * _horizontalValue;
+        _velocity.x = Vector2.right.x * speed * HorizontalValue;
         rBody2D.velocity = _velocity;
 
         if (_velocity.x > 0)
@@ -32,7 +26,7 @@ public class RunState : BaseState
 
         if (IsGrounded)
         {
-            if (_jumpValue > 0)
+            if (JumpValue > 0)
             {
                 NextStateAction.Invoke(PlayerState.Jump);
             }
@@ -40,7 +34,7 @@ public class RunState : BaseState
             {
                 NextStateAction.Invoke(PlayerState.Idle);
             }
-            else if (_verticalValue < 0)
+            else if (VerticalValue < 0)
             {
                 NextStateAction.Invoke(PlayerState.Duck);
             }
@@ -49,10 +43,9 @@ public class RunState : BaseState
         {
             NextStateAction.Invoke(PlayerState.Fall);
         }
-        else if(_jumpValue > 0)
+        else if(JumpValue > 0)
         {
             NextStateAction.Invoke(PlayerState.Jump);
         }
-
     }
 }

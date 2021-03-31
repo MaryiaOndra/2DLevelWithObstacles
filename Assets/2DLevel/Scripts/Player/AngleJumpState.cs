@@ -1,24 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AngleJumpState : BaseState
 {
     [SerializeField]
     float jumpForce;
 
-    float lowYVelosity = -3.0f;
-
     public override PlayerState PlayerState => PlayerState.AngleJump;
 
     private void FixedUpdate()
     {
-
         var _velocity = rBody2D.velocity;
 
-        float _jumpValue = Input.GetAxis("Jump");
-
-        if (_jumpValue > 0)
+        if (JumpValue > 0)
         {
             if (IsNearLeftWall)
             {
@@ -35,9 +28,13 @@ public class AngleJumpState : BaseState
 
         rBody2D.velocity = _velocity;
 
-        if (_velocity.y < lowYVelosity)
+        if (_velocity.y < 0)
         {
             NextStateAction.Invoke(PlayerState.Fall);
+        }
+        else if (IsGrounded)
+        {
+            NextStateAction.Invoke(PlayerState.Idle);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ClimbState : BaseState
 {
@@ -11,16 +9,9 @@ public class ClimbState : BaseState
 
     private void FixedUpdate()
     {
-        float _vertical = Input.GetAxis("Vertical");
-        float _horizontal = Input.GetAxis("Horizontal");
-
         var _velocity = rBody2D.velocity;
-
-
-        _velocity.y = _vertical * speed * Vector2.up.y;
-        _velocity.x = Vector2.right.x * _horizontal * speed;
-
-
+        _velocity.y = VerticalValue * speed * Vector2.up.y;
+        _velocity.x = Vector2.right.x * HorizontalValue * speed;
         rBody2D.velocity = _velocity;
 
         if (IsGrounded)

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DuckState : BaseState
 {
@@ -21,17 +19,23 @@ public class DuckState : BaseState
 
     private void FixedUpdate()
     {
-        float _verticalValue = Input.GetAxis("Vertical");
-        float _horizontalValue = Input.GetAxis("Horizontal");
-
         var _velocity = rBody2D.velocity;
-        _velocity.x = Vector2.right.x * speed * _horizontalValue;
+        _velocity.x = Vector2.right.x * speed * HorizontalValue;
         rBody2D.velocity = _velocity;
 
-        if (_verticalValue >= 0 && !IsCeilingAbove)
+        if (_velocity.x > 0)
+        {
+            playerSprite.flipX = false;
+        }
+        else if (_velocity.x < 0)
+        {
+            playerSprite.flipX = true;
+        }
+
+        if (VerticalValue >= 0 && !IsCeilingAbove)
         {
             colliderToHide.enabled = true;
-            NextStateAction.Invoke(PlayerState.Idle);
+            NextStateAction.Invoke(PlayerState.Run);
         }
     }
 }

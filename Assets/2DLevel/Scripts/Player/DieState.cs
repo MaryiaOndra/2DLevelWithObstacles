@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DieState : BaseState
@@ -16,7 +14,6 @@ public class DieState : BaseState
 
     public void OnDied() 
     {
-        Debug.Log("Ondied");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

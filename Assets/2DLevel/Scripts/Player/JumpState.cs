@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class JumpState : BaseState
 {
     [SerializeField]
-    float speed = 5;
+    float speed;
     [SerializeField]
-    float jumpForce = 1;
+    float jumpForce;
+
+    float lowYVelosity = -5.0f;
 
     public override PlayerState PlayerState => PlayerState.Jump;
 
@@ -22,10 +22,8 @@ public class JumpState : BaseState
 
     private void FixedUpdate()
     {
-        float _horizontalValue = Input.GetAxis("Horizontal");
         var _velocity = rBody2D.velocity;
-
-         _velocity.x = Vector2.right.x * speed * _horizontalValue;
+         _velocity.x = Vector2.right.x * speed * HorizontalValue;
 
         if (_velocity.x > 0)
         {
@@ -47,7 +45,7 @@ public class JumpState : BaseState
                 NextStateAction.Invoke(PlayerState.Run);
             }
         }
-        else if (_velocity.y < 0)
+        else if (_velocity.y < lowYVelosity)
         {
             NextStateAction.Invoke(PlayerState.Fall);
         }

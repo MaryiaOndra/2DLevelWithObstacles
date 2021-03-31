@@ -1,27 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public class IdleState : BaseState
 {
     public override PlayerState PlayerState => PlayerState.Idle;
 
     private void FixedUpdate()
     {
-        float _horizontalValue = Input.GetAxis("Horizontal");
-        float _verticalValue = Input.GetAxis("Vertical");
-        float _jumpValue = Input.GetAxis("Jump");
-
-
-        if (_horizontalValue != 0)
+        if (HorizontalValue != 0)
         {
             NextStateAction.Invoke(PlayerState.Run);
         }
-        else if (_jumpValue != 0)
+        else if (JumpValue != 0)
         {
             NextStateAction.Invoke(PlayerState.Jump);
         }
-        else if (_verticalValue < 0)
+        else if (VerticalValue < 0)
         {
             NextStateAction.Invoke(PlayerState.Duck);
         }
