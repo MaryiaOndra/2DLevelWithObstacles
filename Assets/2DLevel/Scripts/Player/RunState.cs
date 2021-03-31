@@ -7,6 +7,8 @@ public class RunState : BaseState
     [SerializeField]
     float speed = 2;
 
+    float lowYVelosity = -3.0f;
+
     public override PlayerState PlayerState => PlayerState.Run;
 
     private void FixedUpdate()
@@ -38,11 +40,11 @@ public class RunState : BaseState
                 NextStateAction.Invoke(PlayerState.Idle);
             }
         }
-        else if (_velocity.y < 0)
+        else if (_velocity.y < lowYVelosity)
         {
             NextStateAction.Invoke(PlayerState.Fall);
         }
-        else
+        else if(_jumpValue > 0)
         {
             NextStateAction.Invoke(PlayerState.Jump);
         }

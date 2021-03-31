@@ -24,9 +24,7 @@ public abstract class BaseState : MonoBehaviour
         playerSprite = _playerR;
         rBody2D = _rBody2D;
         playerAnimator = _playerAnimator;
-
         collider2Ds = new List<Collider2D>();
-
         SetGroundWallFilters();
     }
 
@@ -34,7 +32,6 @@ public abstract class BaseState : MonoBehaviour
     {
         gameObject.SetActive(true);
         playerAnimator.SetInteger(INT_STATE, (int)PlayerState);
-        Debug.Log(PlayerState);
     }
 
     public virtual void Diactivate() 
@@ -48,7 +45,6 @@ public abstract class BaseState : MonoBehaviour
         {
             NextStateAction.Invoke(PlayerState.Die);
         }
-
     }
 
     public virtual void OnTrigger(Collider2D collision)
@@ -73,6 +69,7 @@ public abstract class BaseState : MonoBehaviour
             return _value;
         }
     }
+
     protected bool IsNearRightWall
     {
         get
@@ -95,6 +92,30 @@ public abstract class BaseState : MonoBehaviour
         }
     }
 
+    protected bool IsCeilingAbove
+    {
+        get
+        {
+            bool _value = false;
+            float _dist = 1.5f;
+           
+            RaycastHit2D _hitCheck = Physics2D.Raycast(rBody2D.transform.position, rBody2D.transform.TransformDirection(Vector2.up), _dist);
+
+            if (_hitCheck.collider.tag != "Platform")
+            {
+                _value = false;
+                Debug.DrawRay(rBody2D.position, Vector2.up * _dist, Color.green);
+            }
+            else
+            {
+                Debug.DrawRay(rBody2D.position, Vector2.up * _dist, Color.yellow);
+                Debug.Log("IS Ceiling above");
+                _value = true;
+            }
+            return _value;
+        }
+    }
+
     void SetGroundWallFilters() 
     {
         groundFilter2D = new ContactFilter2D();
@@ -106,7 +127,7 @@ public abstract class BaseState : MonoBehaviour
         wallsFilterLeft2D.useNormalAngle = true;
 
         wallsFilterRight2D = new ContactFilter2D();
-        wallsFilterRight2D.SetNormalAngle(179, 180);
+        wallsFilterRight2D.SetNormalAngle(179, 181);
         wallsFilterRight2D.useNormalAngle = true;
     }
 }

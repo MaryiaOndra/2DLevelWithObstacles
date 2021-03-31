@@ -7,28 +7,9 @@ public class AngleJumpState : BaseState
     [SerializeField]
     float jumpForce;
 
+    float lowYVelosity = -3.0f;
+
     public override PlayerState PlayerState => PlayerState.AngleJump;
-
-    public override void Activate()
-    {
-
-        base.Activate();
-
-        //var _velocity = rBody2D.velocity;
-
-        //if (IsNearLeftWall)
-        //{
-        //    _velocity = Vector2.one * jumpForce;
-        //    playerSprite.flipX = false;
-        //}
-        //else if (IsNearRightWall)
-        //{
-        //    _velocity.x = Vector2.one.x * jumpForce * -1;
-        //    _velocity.y = Vector2.one.y * jumpForce;
-        //    playerSprite.flipX = true;
-        //}
-        //rBody2D.velocity = _velocity;
-    }
 
     private void FixedUpdate()
     {
@@ -54,7 +35,7 @@ public class AngleJumpState : BaseState
 
         rBody2D.velocity = _velocity;
 
-        if (_velocity.y < 0)
+        if (_velocity.y < lowYVelosity)
         {
             NextStateAction.Invoke(PlayerState.Fall);
         }

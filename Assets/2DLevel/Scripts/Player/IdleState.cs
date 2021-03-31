@@ -9,6 +9,7 @@ public class IdleState : BaseState
     private void FixedUpdate()
     {
         float _horizontalValue = Input.GetAxis("Horizontal");
+        float _verticalValue = Input.GetAxis("Vertical");
         float _jumpValue = Input.GetAxis("Jump");
 
 
@@ -19,6 +20,10 @@ public class IdleState : BaseState
         else if (_jumpValue != 0)
         {
             NextStateAction.Invoke(PlayerState.Jump);
+        }
+        else if (_verticalValue < 0)
+        {
+            NextStateAction.Invoke(PlayerState.Duck);
         }
         else
         {

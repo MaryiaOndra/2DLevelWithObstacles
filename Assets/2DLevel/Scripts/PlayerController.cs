@@ -20,9 +20,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rBody2D;
     Animator playerAnimator;
-
     SpriteRenderer sprite;
-
     List<BaseState> states;
     BaseState currentState;
 
@@ -42,7 +40,6 @@ public class PlayerController : MonoBehaviour
 
         currentState = states.Find(_state => _state.PlayerState == PlayerState.Idle);
         currentState.Activate();
-
     }
 
     public void OnNextStateRequest(PlayerState _state) 
@@ -56,11 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         currentState.OnCollision(collision);
     }
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    currentState.OnTrigger(collision);
-    //}
 
     private void OnTriggerStay2D(Collider2D collision)
     {

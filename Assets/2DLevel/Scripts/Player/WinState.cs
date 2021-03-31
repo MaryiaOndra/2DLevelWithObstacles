@@ -14,13 +14,11 @@ public class WinState : BaseState
     {
         base.Activate();
 
-        StartCoroutine(GoToNextLevel());
+        GoToNextLevel();
     }
 
-    IEnumerator GoToNextLevel() 
+    void GoToNextLevel() 
     {
-        yield return new WaitForSeconds(seconds);
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
